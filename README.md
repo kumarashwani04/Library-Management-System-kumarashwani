@@ -1,125 +1,170 @@
-# Library Management System (LMS)
+# Library Management System
 
-Lightweight Spring Boot + MySQL application with a pure HTML/CSS/vanilla JS UI for managing library inventory and bookings.
+## 1. Project Overview
 
-## Features
-- Browse/search books (client-side pagination)
-- Add new books in bulk
-- Delete books in bulk
-- Borrow a book
-- Cancel/return a booking
-- Inventory count
-- User registration
+The Library Management System is a Java-based application designed to help manage library resources and organize book-related operations.
 
-## Tech Stack
-- Backend: Spring Boot 2.2.x, Spring Data JPA
-- Database: MySQL 8 (Docker via `docker-compose.yml`)
-- Frontend: Static HTML/CSS + vanilla JS (no Angular/Vue)
-- Packaging: WAR; runs via `spring-boot:run`
+The project uses Java for application development and Maven for dependency management. Database operations are intended to use MySQL, subject to the application's configuration.
 
-## Quick Start
-Prereqs: Docker + Docker Compose, Java 8+, Maven (or `./mvnw`)
+## 2. Objectives
+
+- Organize library book records.
+- Simplify library management operations.
+- Demonstrate Java application development.
+- Understand database integration.
+- Practice software version control using Git and GitHub.
+
+## 3. Technology Stack
+
+- **Programming Language:** Java
+- **Build Tool:** Apache Maven
+- **Database:** MySQL, if configured by the application
+- **Database Integration:** Verify the libraries and configuration in `pom.xml`
+- **Version Control:** Git
+- **Code Hosting:** GitHub
+- **Container Configuration:** Docker Compose
+
+## 4. Project Structure
+
+```text
+Library-Management-System/
+├── .github/
+├── .mvn/
+├── dbscript/
+├── src/
+├── .gitignore
+├── docker-compose.yml
+├── mvnw
+├── mvnw.cmd
+├── pom.xml
+├── README.md
+└── run_local.sh
+```
+
+## 5. Prerequisites
+
+Before running the application, install and configure:
+
+- Java Development Kit (JDK), compatible with the project.
+- MySQL Server, if required by the application.
+- Apache Maven, or use the included Maven Wrapper.
+- Git, for version control.
+- An IDE such as IntelliJ IDEA, Eclipse, or VS Code.
+
+Check Java:
 
 ```bash
-./run_local.sh
-```
-- Starts MySQL 8 in Docker (`lms`, root/root) seeded from `dbscript/init.sql` and `schema.sql`/`data.sql`.
-- Starts the Spring Boot app on port 8080.
-
-Open:
-- Catalogue console: http://localhost:8080/views/search.html
-- Registration: http://localhost:8080/views/register.html
-
-Reset DB (drops volume): `docker-compose down -v`
-
-## UI Flows
-1) Browse: default mode shows paged books (ISBN/title/cover/publisher/pages/available).
-2) Inventory count: select “Inventory snapshot” to see total books.
-3) Add books: “Add new titles”, fill required fields (ISBN≥5, title≥3, pages>0, available≥0), add/remove rows, submit; list refreshes.
-4) Delete: “Delete existing”, check rows, “Delete selected”; list refreshes.
-5) Borrow: “Book now”, click “Book this title”; bookings refresh.
-6) Cancel booking: “Cancel booking”, click “Cancel order”; bookings refresh.
-7) Register: fill all fields (passwords must match), submit; inline success/error shown.
-
-## APIs
-- GET `/api/getBooks`
-- POST `/api/addBook` (bulk; validates ISBN≥5, title≥3, pages>0, available≥0)
-- POST `/api/delBook`
-- POST `/api/makeBooking`
-- POST `/api/cancelBooking`
-- GET `/api/getBookingDetails`
-- GET `/api/count`
-- POST `/user/register`
-
-## Validation
-- Books: ISBN≥5 chars, title≥3 chars, pages>0, available≥0; rejected with 400 + message.
-- Registration: all fields required; passwords must match; server returns 400 on invalid payload.
-
-## Project Layout
-- `src/main/java/com/lms/demo/controller`: BookController, UserController, ViewController
-- `src/main/java/com/lms/demo/data/model`: Book, Order, User
-- `src/main/java/com/lms/demo/data/repository`: BookRepository, OrderRepository, UserRepository
-- `src/main/java/com/lms/demo/dto`: CancelBookingRequest, UserDto
-- `src/main/resources/static/views`: `search.html`, `register.html`
-- `src/main/resources/static/js`: `search.js`, `register.js`
-- `src/main/resources`: `application.properties`, `schema.sql`, `data.sql`
-- `dbscript/init.sql`: Docker DB seed
-- `docker-compose.yml`, `run_local.sh`
-
-## Architecture (high level)
-
-- Browser UI  
-  - `search.html` + `search.js` (catalogue console, pagination, CRUD via REST)  
-  - `register.html` + `register.js` (user signup)
-- Spring Boot App  
-  - Controllers: `BookController`, `UserController`, `ViewController`  
-  - Repositories: `BookRepository`, `OrderRepository`, `UserRepository`  
-  - Models/DTOs: `Book`, `Order`, `User`, `CancelBookingRequest`, `UserDto`
-- MySQL 8 (Docker)  
-  - `schema.sql` / `data.sql` (classpath init)  
-  - `dbscript/init.sql` (Docker init)
-
-### UML (context diagram)
-GitHub/Markdown-friendly mermaid:
-
-```mermaid
-flowchart LR
-  User((User))
-
-  subgraph UI[Browser UI]
-    Search[search.html / search.js\nCatalogue console]
-    Register[register.html / register.js\nSignup]
-  end
-
-  subgraph App[Spring Boot App]
-    CtrlBook[BookController]
-    CtrlUser[UserController]
-    CtrlView[ViewController]
-    RepoBook[BookRepository]
-    RepoOrder[OrderRepository]
-    RepoUser[UserRepository]
-  end
-
-  DB[(MySQL 8)]
-  Schema[schema.sql / data.sql]
-  Init[dbscript/init.sql]
-
-  User --> Search
-  User --> Register
-  Search --> CtrlBook
-  Search --> CtrlView
-  Register --> CtrlUser
-  CtrlBook --> RepoBook
-  CtrlBook --> RepoOrder
-  CtrlUser --> RepoUser
-  RepoBook --> DB
-  RepoOrder --> DB
-  RepoUser --> DB
-  Schema --> DB
-  Init --> DB
+java -version
 ```
 
-## Troubleshooting
-- Port 3306 busy: change port mapping in `docker-compose.yml` and JDBC URL in `application.properties`.
-- Permissions on Docker socket: run compose with sudo or adjust Docker permissions.
-- Empty data after reset: run `docker-compose down -v` then `./run_local.sh` to re-seed.
+## 6. Installation
+
+### Step 1: Download the Project
+
+Clone the repository:
+
+```bash
+git clone YOUR_GITHUB_REPOSITORY_URL
+```
+
+Navigate into the downloaded directory:
+
+```bash
+cd Library-Management-System
+```
+
+Replace `YOUR_GITHUB_REPOSITORY_URL` with the actual repository URL.
+
+### Step 2: Configure the Database
+
+1. Install and start MySQL if the application requires it.
+2. Inspect the files in the `dbscript/` directory.
+3. Review the application's database configuration.
+4. Create the required database and tables using the project's documented setup instructions.
+5. Configure database credentials locally.
+
+Do not commit database passwords or other secrets to GitHub.
+
+### Step 3: Build the Project
+
+On Windows, run:
+
+```bash
+mvnw.cmd clean package
+```
+
+If the command fails, verify the Java version and project dependencies.
+
+## 7. Running the Application
+
+On Windows, the Maven Wrapper can be used to run the application if it is configured as a Spring Boot application:
+
+```bash
+mvnw.cmd spring-boot:run
+```
+
+The actual startup command depends on the framework and configuration used by this repository.
+
+Before running the application, complete the required database configuration.
+
+## 8. Features
+
+The following features must be verified against the implementation before submission:
+
+- Book record management.
+- Searching or viewing library records.
+- Database-backed operations.
+- Library administration functionality.
+
+Only features implemented in the source code should be presented as completed.
+
+## 9. Testing
+
+Testing should include:
+
+- Verifying application startup.
+- Checking database connectivity.
+- Testing implemented book management operations.
+- Checking application behavior when invalid data is supplied.
+- Confirming that database changes are saved correctly.
+
+Test results should be documented after the tests have actually been performed.
+
+## 10. Screenshots
+
+Add screenshots of the application interface and working functionality after running the application successfully.
+
+## 11. Future Enhancements
+
+Possible future improvements include:
+
+- Improved search functionality.
+- User authentication and role-based access.
+- Book issue and return tracking.
+- Overdue book notifications.
+- Reports and inventory summaries.
+
+These are proposed enhancements unless already implemented.
+
+## 12. Learning Outcomes
+
+This project can help students explore:
+
+- Java application structure.
+- Maven-based project management.
+- Relational database concepts.
+- Database configuration and integration.
+- Git commits and GitHub repository management.
+
+## 13. Original Source and Attribution
+
+This repository is based on an existing open-source project.
+
+Original repository:
+https://github.com/hiupadhyay/lms
+
+Please consult the original repository's license and preserve the author's required attribution.
+
+## 14. Conclusion
+
+The Library Management System provides a foundation for exploring software development and library-related application workflows. Further configuration, testing, and documentation are necessary to confirm the application's behavior in a particular environment.
