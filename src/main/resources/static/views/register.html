@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script defer src="/js/register.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+</head>
+<body class="page-shell">
+<header class="topbar">
+    <div class="brand-mark">Lumen Library</div>
+    <div class="top-actions">
+        <a class="ghost-link" href="/views/search.html">Back to catalogue</a>
+    </div>
+</header>
+
+<main class="auth-layout" id="register-app">
+    <section class="hero-card">
+        <p class="eyebrow">Create your space</p>
+        <h1>Join our learning collective</h1>
+        <p class="lead">Register once to borrow books, manage reservations, and keep your reading history in sync.</p>
+        <ul class="bullet-list">
+            <li>Clean, human-friendly UI</li>
+            <li>Bookings and cancellations in a click</li>
+            <li>Secure login with password confirmation</li>
+        </ul>
+    </section>
+
+    <section class="card form-card">
+        <div class="card-head">
+            <div>
+                <p class="eyebrow">New member</p>
+                <h2>Set up your account</h2>
+            </div>
+            <div class="chip chip-neutral">Takes less than a minute</div>
+        </div>
+        <form class="stacked-form" id="register-form">
+            <label>Email
+                <input type="email" placeholder="you@example.com" name="email" required>
+            </label>
+            <label>Full name
+                <input type="text" placeholder="Name as it appears on your ID" name="name" required>
+            </label>
+            <label>Date of birth
+                <input type="date" name="dob" required>
+            </label>
+            <div class="two-col">
+                <label>Password
+                    <input type="password" placeholder="••••••••" name="password" required>
+                </label>
+                <label>Confirm password
+                    <input type="password" placeholder="••••••••" name="repeatPassword" required>
+                </label>
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="btn-primary" id="register-submit">Create account</button>
+                <p class="helper-text">Already a member? Head to <a href="/views/search.html" class="ghost-link">Search</a>.</p>
+            </div>
+        </form>
+        <div class="alert success" id="register-success" style="display:none;">
+            <strong>Success:</strong> <span id="register-success-text"></span>
+        </div>
+        <div class="alert danger" id="register-error" style="display:none;">
+            <strong>Check again:</strong> <span id="register-error-text"></span>
+        </div>
+    </section>
+</main>
+</body>
+</html>

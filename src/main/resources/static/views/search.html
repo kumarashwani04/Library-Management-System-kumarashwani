@@ -1,0 +1,77 @@
+<html>
+<title>Library Console</title>
+<head>
+    <script defer src="/js/search.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+</head>
+<body class="page-shell" id="search-app">
+<header class="topbar">
+    <div class="brand-mark">Lumen Library</div>
+    <div class="top-actions">
+        <a class="ghost-link" href="/views/register.html">Register</a>
+        <span class="chip chip-neutral">Lightweight console</span>
+    </div>
+</header>
+
+<section class="hero">
+    <div>
+        <p class="eyebrow">Operations cockpit</p>
+        <h1>Search, manage, and book titles in one view</h1>
+        <p class="lead">Streamlined controls to search catalogue, add or remove titles, and manage live bookings.</p>
+        <div class="hero-actions">
+            <button class="btn-primary" data-action="refresh">Refresh data</button>
+            <button class="btn-ghost" data-mode="add">Add new books</button>
+        </div>
+    </div>
+</section>
+
+<section class="card chooser">
+    <div class="card-head">
+        <div>
+            <p class="eyebrow">Actions</p>
+            <h3>Pick what you want to do</h3>
+        </div>
+    </div>
+    <div class="option-grid" id="mode-switcher">
+        <label class="action-pill">
+            <input type="radio" name="mode" value="browse" checked>
+            <span class="pill-title">Browse library</span>
+            <span class="pill-desc">Pull the full catalogue.</span>
+        </label>
+        <label class="action-pill">
+            <input type="radio" name="mode" value="add">
+            <span class="pill-title">Add new titles</span>
+            <span class="pill-desc">Stage multiple titles and push them together.</span>
+        </label>
+        <label class="action-pill">
+            <input type="radio" name="mode" value="count">
+            <span class="pill-title">Inventory snapshot</span>
+            <span class="pill-desc">See how many records are in the catalogue.</span>
+        </label>
+        <label class="action-pill">
+            <input type="radio" name="mode" value="delete">
+            <span class="pill-title">Delete existing</span>
+            <span class="pill-desc">Select any catalogue rows to remove safely.</span>
+        </label>
+        <label class="action-pill">
+            <input type="radio" name="mode" value="borrow">
+            <span class="pill-title">Book now</span>
+            <span class="pill-desc">Book a title in one click.</span>
+        </label>
+        <label class="action-pill">
+            <input type="radio" name="mode" value="cancel">
+            <span class="pill-title">Cancel booking</span>
+            <span class="pill-desc">Reverse a booking and free inventory.</span>
+        </label>
+    </div>
+</section>
+
+<div class="status-row" id="status-row" style="display:none;">
+    <div class="alert info" id="status-box"></div>
+</div>
+
+<div id="content"></div>
+
+</body>
+</html>
